@@ -29,7 +29,7 @@ GIT = /usr/bin/git
 FILEPP = build/filepp.pl -u
 PERLTIDY = /usr/bin/perltidy -syn -l=160 -nce -nbl -b
 PERLCRITIC = /usr/bin/perlcritic
-PERL ?= /usr/bin/perl
+PERL = /usr/bin/perl
 PROVE = /usr/bin/prove -l
 YUIC = /usr/bin/java -jar build/yuicompressor-2.4.2.jar --charset UTF-8 --line-break 4000
 HTMLC = /usr/bin/java -jar build/htmlcompressor-0.9.9.jar --type html --charset UTF-8 --remove-intertag-spaces --remove-quotes --compress-js --compress-css --line-break 4000
@@ -138,7 +138,9 @@ LIBFILES = \
 	lib/VWebAdm/DB.pm \
 	lib/VWebAdm/DNS.pm \
 	lib/VWebAdm/L10N.pm \
+	lib/VWebAdm/Logger.pm \
 	lib/VWebAdm/Model.pm \
+	lib/VWebAdm/Password.pm \
 	lib/VWebAdm/SaltedHash.pm \
 	lib/VWebAdm/Utils.pm
 
@@ -195,7 +197,9 @@ MANFILES = \
 	lib/VWebAdm/DB.3 \
 	lib/VWebAdm/DNS.3 \
 	lib/VWebAdm/L10N.3 \
+	lib/VWebAdm/Logger.3 \
 	lib/VWebAdm/Model.3 \
+	lib/VWebAdm/Password.3 \
 	lib/VWebAdm/SaltedHash.3 \
 	lib/VWebAdm/Utils.3
 
@@ -238,7 +242,9 @@ TESTFILES = \
 	t/VWebAdm/API.t \
 	t/VWebAdm/DB.t \
 	t/VWebAdm/DNS.t \
+	t/VWebAdm/Logger.t \
 	t/VWebAdm/Model.t \
+	t/VWebAdm/Password.t \
 	t/VWebAdm/SaltedHash.t \
 	t/VWebAdm/Utils.t
 
@@ -387,7 +393,7 @@ quick-install: real-install
 
 install: clean real-install
 
-real-install: all test
+real-install: all test rcvboxadm
 	$(INSTALL) -d $(BINDIR)
 	$(INSTALL) -d $(SBINDIR)
 	$(INSTALL) -d $(DESTDIR)/etc
@@ -557,6 +563,10 @@ clean:
 	$(FIND) . -name "*.pm~" -exec $(RM) {} \;
 	$(RM) -f bin/tmon.out
 	$(RM) -f doc/man/*
+	$(RM) -f contrib/roundcube-plugin-vboxadm.tar.gz
+
+rcvboxadm:
+	cd contrib/roundcube/plugins/ && tar -cvzf ../../roundcube-plugin-vboxadm.tar.gz vboxadm/ && cd ../../../
 
 git: tidy all clean
 	$(GIT) status

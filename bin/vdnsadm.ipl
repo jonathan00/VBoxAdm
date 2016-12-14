@@ -15,8 +15,4 @@ exit 0;
 
 __END__
 
-=head1 NAME
 
-vdnsadm - DNS Manager
-
-=cut

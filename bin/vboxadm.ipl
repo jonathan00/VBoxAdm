@@ -15,8 +15,4 @@ exit 0;
 
 __END__
 
-=head1 NAME
 
-vboxadm - Mailbox manager
-
-=cut

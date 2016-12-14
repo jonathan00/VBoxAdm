@@ -16,7 +16,7 @@ use MIME::Base64;
 
 use VWebAdm::Utils '@VERSION@';
 use VWebAdm::API '@VERSION@';
-use Log::Tree;
+use Log::Tree '@VERSION@';
 
 my ( $conffile_used, %config, @modes, $opts );
 $opts = {};
@@ -147,13 +147,3 @@ foreach my $module ( sort keys %{$response} ) {
         }
     }
 }
-
-__END__
-
-=head1 NAME
-
-vboxadmr - Undocumented
-
-=cut
-
-
